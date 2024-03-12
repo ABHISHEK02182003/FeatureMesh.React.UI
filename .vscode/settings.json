@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0548735b-ec87-42b5-8ddf-44c9af37ea4a/resourceGroups/2024-Interns/providers/Microsoft.Web/sites/FeatureMeshReactUI",
+    "appService.deploySubpath": "build"
+}
