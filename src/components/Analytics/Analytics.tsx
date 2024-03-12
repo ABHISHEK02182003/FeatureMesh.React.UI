@@ -12,7 +12,7 @@ const Analytics: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:5161/api/v1/landingpage');
+        const response = await fetch('http://featuremeshapis.azurewebsites.net/api/v1/landingpage');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
