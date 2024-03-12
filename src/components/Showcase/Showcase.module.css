@@ -35,7 +35,7 @@ height: min-content;
 flex-direction: column;
 }
 .body {
-width: 466px;
+width: 100%;
 height: min-content;
 flex-direction: column;
 }

@@ -1,4 +1,3 @@
-// App.tsx
 import React, { memo } from 'react';
 import type { FC } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
