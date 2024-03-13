@@ -1,0 +1,33 @@
+.auth-button {
+    font-family: 'Exo 2', sans-serif;
+    letter-spacing: 1px;
+    margin-left: 3rem;
+    margin-right: 0.5rem;
+    padding: 0.55em 1rem;
+    border: none;
+    background-color: blueviolet;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+.welcome-container {
+    position: relative;
+    display: flex; /* Use flexbox */    
+    align-items: center; /* Center items vertically */
+}
+
+.welcome-name {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.2em;
+    padding: 0.5rem 1rem;
+}
+
+.highlight {
+    padding-left: 0.5em;
+}
+
+/* Additional styling for other elements if necessary */

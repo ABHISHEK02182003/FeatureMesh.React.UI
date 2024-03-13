@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import './navbar.css';
 import logo from './logo.png';
+import { Login } from '../Login/Login';
+import { Logout } from '../Login/Logout';
+import { WelcomeName } from '../Login/WelcomeName';
+import { useIsAuthenticated } from "@azure/msal-react";
 
 const Navbar: React.FC = () => {
+  const isAuthenticated = useIsAuthenticated();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -27,16 +33,21 @@ const Navbar: React.FC = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/publish" className="nav-button">Publish</Link>
-          {isDropdownOpen && (
-            <div className="dropdown-content">
-              <Link to="/publish/entity" className="dropdown-option">Entity</Link>
-              <Link to="/publish/feature" className="dropdown-option">Feature</Link>
-            </div>
+          {isAuthenticated && (
+            <React.Fragment>
+              <Link to="/publish" className="nav-button">Publish</Link>
+              {isDropdownOpen && (
+                <div className="dropdown-content">
+                  <Link to="/publish/entity" className="dropdown-option">Entity</Link>
+                  <Link to="/publish/feature" className="dropdown-option">Feature</Link>
+                </div>
+              )}
+            </React.Fragment>
           )}
         </div>
-        <Link to="/search" className="nav-button">Search</Link>
-        <Link to="/login" className="login-button">Login</Link>
+        { isAuthenticated && <Link to="/search" className="nav-button">Search</Link> }
+        { isAuthenticated && <WelcomeName /> }
+        { isAuthenticated ? <Logout /> : <Login /> }
       </div>
     </header>
   );
