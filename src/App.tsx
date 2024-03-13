@@ -6,6 +6,7 @@ import resets from "./components/_resets.module.css";
 import { LandingPage } from "./components/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import { EntityPage } from "./components/EntityPage/EntityPage";
+import { EntityPublishPage } from "./components/EntityPublish/EntityPublish";
 
 interface Props {
 	className?: string;
@@ -18,6 +19,7 @@ export const App: FC<Props> = memo(function App(props = {}) {
 				<Navbar />
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
+					<Route path="/publish/entity" element={<EntityPublishPage />} />
 					<Route path="/entity" element={<EntityPage />} />
 					{/* Add more routes as needed */}
 				</Routes>
