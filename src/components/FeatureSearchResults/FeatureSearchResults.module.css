@@ -1,0 +1,10 @@
+.featureSearchResults {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .featureSearchResults h2 {
+    margin-bottom: 1rem; /* Add margin bottom to create a gap */
+  }

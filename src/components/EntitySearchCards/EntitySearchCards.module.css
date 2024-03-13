@@ -1,0 +1,70 @@
+/* EntitySearchCard.module.css */
+
+.entitySearchCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Ensure content is spaced evenly */
+    display: flex;
+    flex-direction: row; /* By default, flex items are laid out horizontally */
+    transition: transform 0.3s ease;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+  }
+  
+  .entitySearchCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .entityDetails {
+    display: flex;
+    flex-direction: column;
+    width: 60%; /* Ensure the container takes the full width */
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .entityDetails h3 {
+    padding-bottom: 0.2rem;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+  }
+
+  .entityDetails p {
+    padding: 0.2rem;
+    font-size: 14px;
+  }
+
+  .keyAttribute {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    width : 40%;
+  }
+
+  .keyAttribute h4{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+  }
+  
+  .keyAttribute p {
+    padding-top: 0.2rem;
+    font-size: 14px;
+  }
+
+  
+  

@@ -1,0 +1,65 @@
+/* FeatureSearchCard.module.css */
+
+.featureSearchCard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px; /* Same padding as in EntitySearchCard */
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.3s ease;
+  font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+}
+
+.featureSearchCard:hover {
+  transform: translateY(-5px);
+}
+
+.featureSearchCard .featureDetails {
+  display: flex;
+  flex-direction: column;
+  width: 60%; /* Same width and padding as entityDetails */
+  padding: 0 0.5rem; /* Same padding as in EntitySearchCard */
+  font-size: 14px;
+}
+
+.featureSearchCard .ownerDetails {
+  display: flex;
+  flex-direction: row;
+  padding: 0 0.5rem; /* Same padding as in EntitySearchCard */
+  width: 40%; /* Same width as keyAttribute */
+}
+
+.featureSearchCard .ownerDetails p {
+  padding: 0.2rem; /* Same padding as in EntitySearchCard */
+}
+
+.featureSearchCard h3 {
+  margin-top: 0;
+  font-weight: bold; /* Make the title text thicker */
+  padding-bottom: 10px; /* Add bottom padding to the title */
+  font-weight: 700;
+}
+
+.featureSearchCard p {
+  margin: 0; /* Remove default margins */
+  padding-bottom: 0.5rem; /* Add bottom padding to paragraphs */
+}
+
+.featureSearchCard .keyAttribute p:last-child {
+  padding-bottom: 0; /* Remove bottom padding from the last paragraph in keyAttribute section */
+}
+
+.featureSearchCard .verticalLine {
+  position: relative;
+  top: 0;
+  bottom: 0; /* Position the line in the middle */
+  width: 1px; /* Width of the line */
+  background-color: #ccc; /* Color of the line */
+  content: '';
+}

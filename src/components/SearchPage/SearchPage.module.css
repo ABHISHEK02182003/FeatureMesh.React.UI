@@ -3,18 +3,18 @@
     flex: 1;
     align-self: stretch;
     flex-direction: column;
-    align-items: flex-start;
     background-color: #fff;
     overflow-y: auto;
     overflow-x: hidden;
+    font-family: Plus Jakarta Sans, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
   }
   .sections {
     position: relative; /* Change to relative */
     width: 100%; /* Change to 100% */
     flex-direction: column;
     align-items: center;
-    gap: 156px;
-    margin-top: 200px; /* Change to margin-top */
+    margin: 4rem 0; /* Change to margin-top */
   }
   
   .topNav {
@@ -114,7 +114,7 @@
       'Liberation Sans', sans-serif;
     width: min-content;
     height: min-content;
-    white-space: nowrap;
+    white-space: nowrap;  
     flex-direction: column;
   }
   .item4 {
