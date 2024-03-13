@@ -59,7 +59,7 @@ font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetic
 .animation {
 width: 534px;
 height: 324px;
-background-image:/* webpackIgnore: true */ url('assets/animation.gif');
+background-image: url('./animation.gif');
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
