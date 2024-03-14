@@ -9,7 +9,7 @@ import { EntityPublishPage } from './components/EntityPublish/EntityPublish';
 import Navbar from './components/Navbar/Navbar';
 import { MsalProvider, useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { InteractionRequiredAuthError } from "@azure/msal-browser";
-import SearchPage from './components/SearchBar/SearchBar';
+import { SearchPage } from './components/SearchPage/SearchPage';
 
 interface Props {
   className?: string;
