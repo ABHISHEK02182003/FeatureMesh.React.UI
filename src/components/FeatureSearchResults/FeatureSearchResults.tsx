@@ -17,15 +17,19 @@ interface Features {
     return (
       <div className={styles.featureSearchResults}>
         <h2>Features</h2>
-        {features.map(feature => (
-          <FeatureSearchCards
-            key={feature.featureName} 
-            title={feature.featureName} // Display featureName as the title
-            entityName = {feature.entityName}
-            entityOwner = {feature.entityOwner}
-            totalNoOfEntries = {feature.totalNoOfEntries}
-          />
-        ))}
+        {features.length > 0 ? (
+          features.map((feature) => (
+            <FeatureSearchCards
+              key={feature.featureName}
+              title={feature.featureName} // Display featureName as the title
+              entityName={feature.entityName}
+              entityOwner={feature.entityOwner}
+              totalNoOfEntries={feature.totalNoOfEntries}
+            />
+          ))
+        ) : (
+          <p>No Results Found</p>
+        )}
       </div>
     );
   };

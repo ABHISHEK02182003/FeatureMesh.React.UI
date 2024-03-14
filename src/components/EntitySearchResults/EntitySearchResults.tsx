@@ -19,15 +19,19 @@ const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities }) =
     return (
       <div className={styles.entitySearchResults}>
         <h2>Entities</h2>
-        {entities.map(entity => (
-          <EntitySearchCard
-          key={entity.entityName} // Use a unique key for each entity
-          entityName={entity.entityName} // Pass entityName
-          entityOwner={entity.entityOwner} // Pass entityOwner
-          entityFeatureCount={entity.entityFeatureCount} // Pass entityFeatureCount
-          keyAttribute={entity.entityKeyAttribute} // Pass keyAttribute
-        />
-        ))}
+        {entities.length > 0 ? (
+          entities.map((entity) => (
+            <EntitySearchCard
+              key={entity.entityName} // Use a unique key for each entity
+              entityName={entity.entityName} // Pass entityName
+              entityOwner={entity.entityOwner} // Pass entityOwner
+              entityFeatureCount={entity.entityFeatureCount} // Pass entityFeatureCount
+              keyAttribute={entity.entityKeyAttribute} // Pass keyAttribute
+            />
+          ))
+        ) : (
+          <p>No Results Found</p>
+        )}
       </div>
     );
   };
