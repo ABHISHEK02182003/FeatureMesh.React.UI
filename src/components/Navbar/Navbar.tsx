@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
         >
           {isAuthenticated && (
             <React.Fragment>
-              <Link to="/publish" className="nav-button">Publish</Link>
+              <div className="nav-button">Publish</div>
               {isDropdownOpen && (
                 <div className="dropdown-content">
                   <Link to="/publish/entity" className="dropdown-option">Entity</Link>

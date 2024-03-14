@@ -1,0 +1,14 @@
+/* EntitySearchResults.module.css */
+
+.entitySearchResults {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .entitySearchResults h2 {
+    margin-bottom: 1rem; /* Add margin bottom to create a gap */
+  }
+  
+  
