@@ -7,7 +7,6 @@
   padding: 0 3rem; /* Add padding of 1rem on the left and right */
 }
 
-
 .entitySearchResults {
   display: flex;
   width: 35%;
@@ -15,6 +14,19 @@
 
 .featureSearchResults {
   /* Add styles as needed */
-  display :flex;
+  display: flex;
   width: 65%;
+}
+
+/* Media Query for screens smaller than 768px (tablets and below) */
+@media (max-width: 768px) {
+  .searchResultsContainer {
+    flex-direction: column; /* Change flex direction to column */
+    padding: 0 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .entitySearchResults,
+  .featureSearchResults {
+    width: 100%; /* Set width to 100% for both items */
+  }
 }

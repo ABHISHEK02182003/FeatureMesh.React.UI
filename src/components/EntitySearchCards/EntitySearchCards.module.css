@@ -42,7 +42,7 @@
 
   .entityDetails p {
     padding: 0.2rem;
-    font-size: 14px;
+    font-size: 0.9em;
   }
 
   .keyAttribute {
@@ -63,7 +63,7 @@
   
   .keyAttribute p {
     padding-top: 0.2rem;
-    font-size: 14px;
+    font-size: 0.9em;
   }
 
   

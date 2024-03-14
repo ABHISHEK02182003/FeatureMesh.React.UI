@@ -25,7 +25,7 @@
   flex-direction: column;
   width: 60%; /* Same width and padding as entityDetails */
   padding: 0 0.5rem; /* Same padding as in EntitySearchCard */
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .featureSearchCard .ownerDetails {
@@ -33,6 +33,15 @@
   flex-direction: row;
   padding: 0 0.5rem; /* Same padding as in EntitySearchCard */
   width: 40%; /* Same width as keyAttribute */
+  font-size: 0.9em;
+}
+
+.featureSearchCard .ownerDetails .ownerName {
+  align-items: flex-start;
+}
+
+.featureSearchCard .ownerDetails .entriesCount {
+  align-items: flex-end;
 }
 
 .featureSearchCard .ownerDetails p {
@@ -62,4 +71,16 @@
   width: 1px; /* Width of the line */
   background-color: #ccc; /* Color of the line */
   content: '';
+}
+
+@media (max-width: 768px) {
+  .ownerDetails {
+    flex-direction: column; /* Change flex direction to column */
+    padding: 0 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .ownerName,
+  .entriesCount {
+    width: 100%; /* Set width to 100% for both items */
+  }
 }
