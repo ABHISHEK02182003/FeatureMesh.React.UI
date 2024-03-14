@@ -1,0 +1,63 @@
+.form-container {
+	display: flex;
+	flex-direction: column;
+	width: 94vw;
+	font-family: Plus Jakarta Sans, system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+.form-container > form {
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+textarea {
+	resize: none;
+}
+.form-container > form > label > input {
+	border: 1px solid black;
+	border-radius: 0.1rem;
+	transition: all 0.3 ease-in-out;
+}
+.form-container > form > label {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	padding-top: 1rem;
+	width: 80%;
+	margin: auto;
+	font-size: 1.2rem;
+}
+.form-container > form > label > input {
+	width: 100%;
+	padding: 0.5rem;
+}
+.form-container > form > label > input:focus {
+	border: 1px solid #5a8ef2;
+}
+.form-container > form > label > input:hover {
+	border: 1px solid #5a8ef2;
+}
+
+.form-heading {
+	color: #0056b3;
+}
+.form-container > form > button {
+	background: linear-gradient(to right, #add8e6, #000080);
+	border: none;
+	color: white;
+	padding: 0.625rem 1.25rem;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1rem;
+	margin: 0.25rem 0.125rem;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	margin-left: 2rem;
+	width: max-content;
+	position: relative;
+	left: 60rem;
+	bottom: -2rem;
+}
+.form-container > form > label > span {
+	font-weight: 600;
+}
