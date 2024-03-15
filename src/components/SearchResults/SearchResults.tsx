@@ -9,6 +9,7 @@ interface Entity {
   entityKeyAttribute : string;
   entityOwner : string;
   entityFeatureCount : number;
+  entityID: string;
 }
 
 interface Features {
@@ -25,11 +26,14 @@ interface Props {
 
 
 const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
+  console.log('Hello', entityData);
+
   const entities: Entity[] = entityData.map((entity) => ({
     entityName: entity.name,
     entityKeyAttribute: entity.uniqueIdentifier,
     entityOwner: 'John Doe',
     entityFeatureCount: entity.FeatureIds ? entity.FeatureIds.length : 0,
+    entityID: entity.id
   }));
 
   const features: Features[] = featureData.map((feature) => ({
@@ -42,7 +46,7 @@ const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
   return (
     <div className={classes.searchResultsContainer}>
       <div className={classes.entitySearchResults}>
-        <EntitySearchResults entities={entities} entityJSON={entityData} />
+        <EntitySearchResults entities={entities} />
       </div>
       <div className={classes.featureSearchResults}>
         <FeatureSearchResults features={features}/>

@@ -9,15 +9,14 @@ interface EntitySearchCardProps {
   entityOwner: string;
   entityFeatureCount: number;
   keyAttribute: string; // New prop for key attribute
-  entityJSON: any;
+  entityID: string;
 }
 
 const EntitySearchCards: React.FC<EntitySearchCardProps> = ({ 
-  entityName, entityOwner, entityFeatureCount, keyAttribute, entityJSON }) => {
-  console.log(entityJSON);
+  entityName, entityOwner, entityFeatureCount, keyAttribute, entityID }) => {
 
   return (
-    <Link to="../entity-page" className={styles.cardContainerLink}>
+    <Link to={`../entity-page/${entityID}`} className={styles.cardContainerLink}>
       <div className={styles.entitySearchCard}>
           <div className={styles.entityDetails}>
             <h3>{entityName}</h3>

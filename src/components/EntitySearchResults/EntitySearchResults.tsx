@@ -5,6 +5,7 @@ import styles from './EntitySearchResults.module.css'; // Import CSS module for 
 
 // Define Entity type
 interface Entity {
+    entityID: string;
     entityName : string;
     entityKeyAttribute : string;
     entityOwner : string;
@@ -13,10 +14,9 @@ interface Entity {
 
 interface EntitySearchResultsProps {
   entities: Entity[];
-  entityJSON: any;
 }
 
-const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities, entityJSON }) => {
+const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities }) => {
     return (
       <div className={styles.entitySearchResults}>
         <h2>Entities</h2>
@@ -27,7 +27,7 @@ const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities, ent
               entityOwner={entity.entityOwner} // Pass entityOwner
               entityFeatureCount={entity.entityFeatureCount} // Pass entityFeatureCount
               keyAttribute={entity.entityKeyAttribute} // Pass keyAttribute
-              entityJSON={entityJSON} // Pass whole JSON
+              entityID={entity.entityID}
             />
           ))
         ) : (
