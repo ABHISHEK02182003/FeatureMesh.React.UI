@@ -42,17 +42,16 @@ export const EntityPublishPage: React.FC = () => {
 	
 		const jsonObject = {
 			EntityId: entityId,
-			name: entityName,
+			Name: entityName,
 			FeatureIds: [],
 			Description: entityDescription
 		};
 
 		try {
-			const response = await fetch('http://featuremesharch.azurewebsites.net/entity', {
+			const response = await fetch('https://featuremesharch.azurewebsites.net/entity', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
+					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(jsonObject)
 			});
