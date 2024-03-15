@@ -42,7 +42,7 @@ const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
   return (
     <div className={classes.searchResultsContainer}>
       <div className={classes.entitySearchResults}>
-        <EntitySearchResults entities={entities} />
+        <EntitySearchResults entities={entities} entityJSON={entityData} />
       </div>
       <div className={classes.featureSearchResults}>
         <FeatureSearchResults features={features}/>
