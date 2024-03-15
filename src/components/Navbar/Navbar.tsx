@@ -40,6 +40,7 @@ const Navbar: React.FC = () => {
                 <div className="dropdown-content">
                   <Link to="/publish/entity" className="dropdown-option">Entity</Link>
                   <Link to="/publish/feature" className="dropdown-option">Feature</Link>
+                  <Link to="/publish/values" className="dropdown-option">Values</Link>
                 </div>
               )}
             </React.Fragment>
