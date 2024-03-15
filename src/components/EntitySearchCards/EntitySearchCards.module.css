@@ -1,4 +1,8 @@
 /* EntitySearchCard.module.css */
+.cardContainerLink {
+  text-decoration: None;
+  color: black;
+}
 
 .entitySearchCard {
     border: 1px solid #ccc;

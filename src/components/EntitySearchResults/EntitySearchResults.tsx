@@ -13,20 +13,21 @@ interface Entity {
 
 interface EntitySearchResultsProps {
   entities: Entity[];
+  entityJSON: any;
 }
 
-const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities }) => {
+const EntitySearchResults: React.FC<EntitySearchResultsProps> = ({ entities, entityJSON }) => {
     return (
       <div className={styles.entitySearchResults}>
         <h2>Entities</h2>
         {entities.length > 0 ? (
           entities.map((entity) => (
             <EntitySearchCard
-              key={entity.entityName} // Use a unique key for each entity
               entityName={entity.entityName} // Pass entityName
               entityOwner={entity.entityOwner} // Pass entityOwner
               entityFeatureCount={entity.entityFeatureCount} // Pass entityFeatureCount
               keyAttribute={entity.entityKeyAttribute} // Pass keyAttribute
+              entityJSON={entityJSON} // Pass whole JSON
             />
           ))
         ) : (

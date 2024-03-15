@@ -26,6 +26,8 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 		context: "N/A",
 	};
 
+	console.log(entityDetails);
+
 	// Merge default values with provided props
 	const details = { ...defaultDetails, ...entityDetails };
 

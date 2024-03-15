@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import "./EntityPublish.css";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormState {
 	ownerName: string;
@@ -47,12 +48,13 @@ export const EntityPublishPage: React.FC = () => {
 			Description: entityDescription
 		};
 
+		console.log(jsonObject);
+
 		try {
-			const response = await fetch('http://featuremesharch.azurewebsites.net/entity', {
+			const response = await fetch('https://featuremeshapis.azurewebsites.net/api/v1/Entity', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
+					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(jsonObject)
 			});
