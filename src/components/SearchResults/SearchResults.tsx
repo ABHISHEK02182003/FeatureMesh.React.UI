@@ -17,6 +17,7 @@ interface Features {
   entityName : string;
   entityOwner : string;
   totalNoOfEntries : number;
+  featureID: string;
 }
 
 interface Props {
@@ -40,7 +41,8 @@ const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
     featureName: feature.name,
     entityName: feature.entityId,
     entityOwner: "John Doe",
-    totalNoOfEntries: 100
+    totalNoOfEntries: 100,
+    featureID: feature.id
   }));
   
   return (

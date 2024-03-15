@@ -36,7 +36,7 @@ export const App: FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/publish/feature" element={<FeaturePublish />} />
             <Route path="/entity-page/:id" element={<EntityPage />} />
-            <Route path="/feature-page" element={<FeaturePage />} />
+            <Route path="/feature-page/:id" element={<FeaturePage />} />
             {/* Add more routes as needed */}
           </Routes>
         </div>

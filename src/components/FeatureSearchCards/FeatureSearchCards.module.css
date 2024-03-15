@@ -1,4 +1,8 @@
 /* FeatureSearchCard.module.css */
+.cardContainerLink {
+  text-decoration: None;
+  color: black;
+}
 
 .featureSearchCard {
   border: 1px solid #ccc;
