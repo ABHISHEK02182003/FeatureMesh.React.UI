@@ -7,6 +7,7 @@ interface Features {
     entityName : string;
     entityOwner : string;
     totalNoOfEntries : number;
+    featureID: string;
   }
   
   interface FeatureSearchResultsProps {
@@ -25,6 +26,7 @@ interface Features {
               entityName={feature.entityName}
               entityOwner={feature.entityOwner}
               totalNoOfEntries={feature.totalNoOfEntries}
+              featureID={feature.featureID}
             />
           ))
         ) : (
