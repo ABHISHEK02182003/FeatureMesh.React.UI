@@ -16,8 +16,9 @@ import { SearchPage } from "./components/SearchPage/SearchPage";
 import { EntityPage } from "./components/EntityPage/EntityPage";
 import { ToastContainer } from "react-toastify"; // Import ToastContainer
 import "react-toastify/dist/ReactToastify.css"; // Ensure you have this import for the CSS
-import FeaturePublish from "./components/FeaturePublish/FeaturePublish";
 import { FeaturePage } from "./components/FeaturePage/FeaturePage";
+import ValuePublish from "./components/ValuePublish/ValuePublish";
+import { FeaturePublish } from "./components/FeaturePublish/FeaturePublish";
 
 interface Props {
   className?: string;
@@ -34,6 +35,7 @@ export const App: FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/" element={<LandingPage />} />
             <Route path="/publish/entity" element={<EntityPublishPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/publish/values" element={<ValuePublish />} />
             <Route path="/publish/feature" element={<FeaturePublish />} />
             <Route path="/entity-page/:id" element={<EntityPage />} />
             <Route path="/feature-page" element={<FeaturePage />} />

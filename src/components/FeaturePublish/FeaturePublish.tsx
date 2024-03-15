@@ -1,142 +1,128 @@
+import { toast } from "react-toastify";
+ 
 import React, { useState } from "react";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import "./FeaturePublish.css";
 import { useMsal } from "@azure/msal-react";
+import "./FeaturePublish.css";
  
-const FeaturePublish: React.FC = () => {
-  const { accounts } = useMsal();
-  const account = accounts[0];
-
-  const username = account ? account.username : "Unknown";
-  const fname = username.split(".")[0];
-
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [ownerName, setOwnerName] = useState<string>("");
-  const [entityName, setEntityName] = useState<string>("");
+import "react-toastify/dist/ReactToastify.css";
  
-  const handleOptionChange = (option: string) => {
-    setSelectedOption(option);
-  };
+interface FormState {
+    featureName: string;
+    dataType: string;
+    entityId: string;
+    description: string;
+}
  
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
+export const FeaturePublish: React.FC = () => {
  
-  const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOwnerName(e.target.value);
-  };
+    const [formState, setFormState] = useState<FormState>({
+        featureName: "",
+        dataType:"",
+        entityId: "",
+        description: ""
+    });
  
-  const handleEntityNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEntityName(e.target.value);
-  };
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const { name, value } = e.target as HTMLInputElement & HTMLTextAreaElement;
+        setFormState((prevState) => ({ ...prevState, [name]: value }));
+    };
  
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (selectedOption === "upload" && selectedFile) {
-      const formData = new FormData();
-      formData.append("files", selectedFile);
-      formData.append("ScientistName", ownerName); // Add owner name to form data
-      formData.append("EntityName", entityName); // Add entity name to form data
-     
-      try {
-        const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/files/uploadfilestostorage", {
-          method: "POST",
-          body: formData
-        });
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
  
-        if (response.ok) {
-          console.log('File uploaded successfully');
-          toast.success("File uploaded successfully!");
-        } else {
-          toast.error("Error uploading file");
+        const { featureName, description, dataType } = formState;
+ 
+        const jsonObject = {
+            Name: featureName,
+            Description: description,
+            DataType: dataType
+        };
+ 
+        console.log(jsonObject);
+ 
+        try {
+            const response = await fetch(
+              `https://featuremeshapis.azurewebsites.net/api/v1/feature/${formState.entityId}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(jsonObject),
+                }
+            );
+ 
+            if (response.ok) {
+                console.log("Entity published successfully");
+                toast.success("Entity published successfully");
+                setFormState({
+                    entityId: "",
+                    featureName: "",
+                    dataType: "",
+                    description: "",
+                });
+            } else {
+                console.error("Failed to publish entity:", response.statusText);
+                toast.error("Failed to publish entity");
+            }
+        } catch (error) {
+            console.error("Error publishing entity:", error);
+            toast.error("Error publishing entity");
         }
-      } catch (error) {
-        console.error("Error:", error);
-        toast.error("Error uploading file");
-      }
-    } else {
-      // Handle manual entry functionality
-      toast.success("Enter feature details");
-    }
-  };
+    };
  
-  return (
-    <div style={{ margin: "6rem 2rem 2rem 2rem" }}>
-      <div className="form-container">
-        <div className="form-heading">
-          <h1>Enter the Feature Details {selectedOption && <>using {selectedOption}</>}</h1>
+    return (
+        <div style={{ margin: "6rem 2rem 2rem 2rem" }}>
+            <div className="form-container">
+                <div className="form-heading">
+                    <h1>Enter the Feature Details</h1>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        <span>Entity Id:</span>
+                        <input
+                            type="text"
+                            name="entityId"
+                            placeholder="Enter the Entity Id"
+                            value={formState.entityId}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        <span>Feature Name:</span>
+                        <input
+                            type="text"
+                            name="featureName"
+                            placeholder="Enter the Feature Name"
+                            value={formState.featureName}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        <span>Feature DataType:</span>
+                        <input
+                            type="text"
+                            name="dataType"
+                            placeholder="Enter the Feature data type"
+                            value={formState.dataType}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        <span>Feature Description:</span>
+                        <input
+                            type="text"
+                            name="description"
+                            placeholder="Enter the Feature Description"
+                            value={formState.description}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <button type="submit">Publish</button>
+                </form>
+            </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="option-container">
-            <input
-              type="radio"
-              id="manualEntry"
-              name="option"
-              value="manual entry"
-              checked={selectedOption === "manual entry"}
-              onChange={() => handleOptionChange("manual entry")}
-            />
-            <label className="label" htmlFor="manualEntry">Manual Entry</label>
-            <input
-              type="radio"
-              id="upload"
-              name="option"
-              value="upload"
-              checked={selectedOption === "upload"}
-              onChange={() => handleOptionChange("upload")}
-            />
-            <label className="label" htmlFor="upload">Upload</label>
-          </div>
-          {selectedOption === "upload" && (
-            <>
-              <div>
-                <label htmlFor="ownerName">Enter owner name:  </label>
-                <input
-                  type="text"
-                  id="ownerName"
-                  placeholder="Owner Name"
-                  value={fname}
-                  onChange={handleOwnerNameChange}
-                  disabled
-                />
-              </div>
-              <div>
-                <label htmlFor="entityName">Enter entity name:  </label>
-                <input
-                  type="text"
-                  id="entityName"
-                  placeholder="Entity Name"
-                  value={entityName}
-                  onChange={handleEntityNameChange}
-                />
-              </div>
-              <div>
-                <input
-                  type="file"
-                  id="fileInput"
-                  className="file-input"
-                  accept=".xlsx"
-                  onChange={handleFileChange}
-                />
-              </div>
-            </>
-          )}
-          <div className="button-container">
-            {selectedOption === "upload" && <button type="submit">Submit</button>}
-          </div>
-        </form>
-        {selectedOption === "upload" && (
-          <div className="template-download-container">
-            <button>Download Template</button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    );
 };
- 
-export default FeaturePublish;
