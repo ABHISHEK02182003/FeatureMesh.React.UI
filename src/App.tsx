@@ -29,34 +29,8 @@ export const App:FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/search" element={<SearchPage />} />
             {/* Add more routes as needed */}
           </Routes>
-          <Pages />
         </div>
       </Router>
     </MsalProvider>
   )
 });
-
-const Pages = () => {
-  const { instance } = useMsal();
-  const isAuthenticated = useIsAuthenticated();
-
-  useEffect(() => {
-      if (!isAuthenticated) {
-          instance.ssoSilent({
-              scopes: ["user.read"],
-              // loginHint: "", 
-          }).then((response) => {
-              instance.setActiveAccount(response.account);
-          }).catch(error => {
-                  if (error instanceof InteractionRequiredAuthError) {
-                      instance.loginRedirect();
-                  }
-              });
-      }
-  // eslint-disable-next-line
-  }, []);
-
-  return (
-      <></>
-  )
-}

@@ -1,4 +1,8 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useState } from "react";
+import { useMsal } from "@azure/msal-react";
 import "./EntityPublish.css";
 
 interface FormState {
@@ -9,12 +13,19 @@ interface FormState {
 }
 
 export const EntityPublishPage: React.FC = () => {
+	const { accounts } = useMsal();
+    const account = accounts[0];
+
+	const username = account ? account.username : "Unknown";
+    const fname = username.split('.')[0];
+
 	const [formState, setFormState] = useState<FormState>({
 		ownerName: "",
 		entityName: "",
 		entityId: "",
 		entityDescription: "",
 	});
+
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,10 +34,48 @@ export const EntityPublishPage: React.FC = () => {
 		setFormState((prevState) => ({ ...prevState, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(formState);
+	
+		const { entityId, entityName, entityDescription } = formState;
+	
+		const jsonObject = {
+			EntityId: entityId,
+			name: entityName,
+			FeatureIds: [],
+			Description: entityDescription
+		};
+
+		try {
+			const response = await fetch('http://featuremesharch.azurewebsites.net/entity', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
+				body: JSON.stringify(jsonObject)
+			});
+	
+			if (response.ok) {
+				console.log('Entity published successfully');
+				toast.success('Entity published successfully');
+				setFormState({
+					ownerName: "",
+					entityName: "",
+					entityId: "",
+					entityDescription: "",
+				});
+			} else {
+				console.error('Failed to publish entity:', response.statusText);
+				toast.error('Failed to publish entity');
+			}
+		} catch (error) {
+			console.error('Error publishing entity:', error);
+			toast.error('Error publishing entity');
+		}
 	};
+	
 
 	return (
 		<div style={{ margin: "6rem 2rem 2rem 2rem" }}>
@@ -41,8 +90,9 @@ export const EntityPublishPage: React.FC = () => {
 							type="text"
 							name="ownerName"
 							placeholder="John Doe"
-							value={formState.ownerName}
+							value={fname}
 							onChange={handleChange}
+							disabled
 						/>
 					</label>
 					<label>

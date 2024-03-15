@@ -29,7 +29,7 @@ const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
     entityName: entity.name,
     entityKeyAttribute: entity.uniqueIdentifier,
     entityOwner: 'John Doe',
-    entityFeatureCount: entity.feautureIds ? entity.feautureIds.length : 0,
+    entityFeatureCount: entity.FeatureIds ? entity.FeatureIds.length : 0,
   }));
 
   const features: Features[] = featureData.map((feature) => ({
