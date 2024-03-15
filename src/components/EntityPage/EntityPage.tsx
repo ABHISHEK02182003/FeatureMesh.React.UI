@@ -5,6 +5,7 @@ import "./EntityPage.css"; // Import the CSS file
 // Define the shape of the entity details prop
 interface EntityDetails {
 	id: string;
+	name: string
 	author: string;
 	createdAt: string;
 	lastUpdatedAt: string;
@@ -23,12 +24,13 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [details, setDetails] = useState<EntityDetails>({
+		name: "N/A",
 		id: "N/A",
 		author: "John Doe",
 		createdAt: "N/A",
 		lastUpdatedAt: "N/A",
 		context: "N/A",
-		feautureIds: null,
+		feautureIds: null
 	});
 	const [disableDownload, setDisableDownload] = useState(true);
 
@@ -41,6 +43,7 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 				}
 				const data = await response.json();
 				setDetails({
+					name: data.name,
 					id: data.id,
 					author: "John Doe",
 					createdAt: data.created,
@@ -73,7 +76,7 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 			<div className="wrapper">
 				<div className="left-container">
 					<div>
-						<h1>EntityName</h1>
+						<h1>{details.name}</h1>
 					</div>
 					<div className="entity-details-list">
 						<ul>
