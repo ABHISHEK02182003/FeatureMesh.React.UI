@@ -9,6 +9,7 @@ import { Login } from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import { MsalProvider, useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { InteractionRequiredAuthError } from "@azure/msal-browser";
+import { FeaturePage } from './components/FeaturePage/FeaturePage';
 
 interface Props {
   className?: string;
@@ -25,6 +26,7 @@ export const App:FC<Props> = memo(function App({ msalInstance }) {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             {/* Add more routes as needed */}
+            <Route path="/SearchLastPage" element={<FeaturePage />} />
           </Routes>
           <Pages />
         </div>
