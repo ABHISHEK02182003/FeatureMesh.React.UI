@@ -11,7 +11,6 @@ import { MsalProvider, useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { InteractionRequiredAuthError } from "@azure/msal-browser";
 import { SearchPage } from './components/SearchPage/SearchPage';
 import { EntityPage } from './components/EntityPage/EntityPage';
-import { FeaturePage } from './components/FeaturePage/FeaturePage';
 
 interface Props {
   className?: string;
@@ -29,8 +28,7 @@ export const App:FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/" element={<LandingPage />} />
             <Route path="/publish/entity" element={<EntityPublishPage />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/entity-page/:id" element={<EntityPage />} />
-            <Route path="/feature-page" element={<FeaturePage />} />
+            <Route path="/entity-page" element={<EntityPage />} />
             {/* Add more routes as needed */}
           </Routes>
         </div>
