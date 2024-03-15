@@ -55,8 +55,8 @@ export const FeaturePublish: React.FC = () => {
             );
  
             if (response.ok) {
-                console.log("Entity published successfully");
-                toast.success("Entity published successfully");
+                console.log("Feature published successfully");
+                toast.success("Feature published successfully");
                 setFormState({
                     entityId: "",
                     featureName: "",
@@ -64,12 +64,12 @@ export const FeaturePublish: React.FC = () => {
                     description: "",
                 });
             } else {
-                console.error("Failed to publish entity:", response.statusText);
-                toast.error("Failed to publish entity");
+                console.error("Failed to publish feature:", response.statusText);
+                toast.error("Failed to publish feature");
             }
         } catch (error) {
-            console.error("Error publishing entity:", error);
-            toast.error("Error publishing entity");
+            console.error("Error publishing feature:", error);
+            toast.error("Error publishing featire");
         }
     };
  

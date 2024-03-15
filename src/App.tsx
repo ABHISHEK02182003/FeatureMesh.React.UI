@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 // eslint-disable-next-line
-import { useEffect } from "react";
 import type { FC } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import classes from "./App.module.css";
@@ -38,8 +37,7 @@ export const App: FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/publish/values" element={<ValuePublish />} />
             <Route path="/publish/feature" element={<FeaturePublish />} />
             <Route path="/entity-page/:id" element={<EntityPage />} />
-            <Route path="/feature-page" element={<FeaturePage />} />
-
+            <Route path="/feature-page/:id" element={<FeaturePage />} />
             {/* Add more routes as needed */}
           </Routes>
         </div>
