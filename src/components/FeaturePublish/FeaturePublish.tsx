@@ -69,7 +69,7 @@ export const FeaturePublish: React.FC = () => {
             }
         } catch (error) {
             console.error("Error publishing feature:", error);
-            toast.error("Error publishing featire");
+            toast.error("Error publishing feature");
         }
     };
  

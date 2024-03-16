@@ -5,7 +5,7 @@ import "./EntityPage.css"; // Import the CSS file
 // Define the shape of the entity details prop
 interface EntityDetails {
 	id: string;
-	name: string
+	name: string;
 	author: string;
 	createdAt: string;
 	lastUpdatedAt: string;
@@ -63,6 +63,58 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 		fetchEntityDetails();
 	}, [id]);
 
+	const fetchFeatureName = async (featureId: string): Promise<string> => {
+		try {
+			const response = await fetch(`https://featuremeshapis.azurewebsites.net/api/v1/Feature/${featureId}`);
+			if (!response.ok) {
+				throw new Error('Failed to fetch feature details');
+			}
+			const data = await response.json();
+			return data.name;
+		} catch (error) {
+			console.error('Error fetching feature name:', error);
+			throw error;
+		}
+	};
+
+	useEffect(() => {
+		if (details.feautureIds && details.feautureIds.length > 0) {
+			const fetchFeatureNames = async () => {
+				const promises = details.feautureIds!.map(featureId => fetchFeatureName(featureId));
+				try {
+					const featureNames = await Promise.all(promises);
+					console.log('Feature names:', featureNames);
+					// Handle feature names here if needed
+				} catch (error) {
+					console.error('Error fetching feature names:', error);
+					// Handle error if needed
+				}
+			};
+
+			fetchFeatureNames();
+		}
+	}, [details.feautureIds]);
+
+	const [featureNames, setFeatureNames] = useState<string[]>([]);
+
+	// Call fetchFeatureName for each featureId and store the results in state
+	useEffect(() => {
+		if (details.feautureIds && details.feautureIds.length > 0) {
+			const fetchFeatureNames = async () => {
+				const promises = details.feautureIds!.map(featureId => fetchFeatureName(featureId));
+				try {
+					const names = await Promise.all(promises);
+					setFeatureNames(names);
+				} catch (error) {
+					console.error('Error fetching feature names:', error);
+					// Handle error if needed
+				}
+			};
+
+			fetchFeatureNames();
+		}
+	}, [details.feautureIds]);
+
 	if (loading) {
 		return <div>Loading...</div>;
 	}
@@ -94,27 +146,17 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 					</div>
 
 					<div className="features-list">
-						{details.feautureIds && details.feautureIds.length > 0 ? (
-							<ul>
-								{details.feautureIds.map((featureId, index) => (
-									<li key={index}>
-										<input
-											type="checkbox"
-											id={`featureCheckbox-${index}`}
-											className="custom-checkbox"
-											value={featureId}
-										/>
-										<label htmlFor={`featureCheckbox-${index}`} className="custom-label">
-											{featureId}
-										</label>
-									</li>
-								))}
-							</ul>
-						) : (
-							<div>No features</div>
-						)}
+					{featureNames.length > 0 ? (
+						<ul>
+							{featureNames.map((name, index) => (
+								<li><a href={`/feature-page/${details.feautureIds![index]}`}>{name}</a></li>
+							))}
+						</ul>
+					) : (
+						<div>No features</div>
+					)}
 					</div>
-					<div className="download-option">
+					{/* <div className="download-option">
 						<div className="input">
 							<select className="file-format-select">
 								<option value="csv">CSV</option>
@@ -124,7 +166,7 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 								Download
 							</button>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
