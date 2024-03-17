@@ -67,27 +67,28 @@ export const FeaturePage: React.FC<FeaturePageProps> = ({ featureDetails }) => {
         <div className="page-container">
             <div className="feature-container">
                 <div className="feature-header">
-                    <h2>{details.name}</h2>
+                    <h1>{details.entityName}</h1>
                 </div>
                 <div className="feature-body">
                     <div className="feature-column feature-info">
-                        <p><strong>Entity Name: </strong> {details.entityName}</p>
-                        <p><strong>Datatype: </strong> {details.datatype}</p>
-                        <p><strong>Author: </strong> {details.author}</p>
-                        <p><strong>Total Entries: </strong> {details.totalEntries}</p>
+                        <p><strong>Feature Name </strong> {":  " + details.name}</p>
+                        <p><strong>Datatype </strong> {":  " + details.datatype}</p>
+                        <p><strong>Author </strong> {":  " + details.author}</p>
+                        <p><strong>Total Entries </strong> {":  " + details.totalEntries}</p>
                     </div>
                     <div className="feature-column feature-description">
                         <h3>Description</h3>
+                        <br/>
                         <p>{details.description}</p>
                     </div>
                 </div>
-            </div>
-            <div className="feature-footer">
-                <select className="feature-dropdown">
-                    <option value="csv">CSV</option>
-                    <option value="excel">Excel</option>
-                </select>
-                <button className="feature-download-btn">Download</button>
+                <div className="feature-footer">
+                    <select className="feature-dropdown">
+                        <option value="csv">CSV</option>
+                        <option value="excel">Excel</option>
+                    </select>
+                    <button className="feature-download-btn">Download</button>
+                </div>
             </div>
         </div>
     );
