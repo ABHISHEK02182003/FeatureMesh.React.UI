@@ -133,7 +133,6 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 					<div className="entity-details-list">
 						<ul>
 							<li>Id: {details.id}</li>
-							<li>Author: {details.author}</li>
 							<li>Created At: {details.createdAt}</li>
 							<li>Last Updated At: {details.lastUpdatedAt}</li>
 							<li>Context: {details.context}</li>
