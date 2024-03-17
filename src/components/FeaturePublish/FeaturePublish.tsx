@@ -1,13 +1,11 @@
 import { toast } from "react-toastify";
 import React, { useState } from "react";
-import { useMsal } from "@azure/msal-react";
 import "react-toastify/dist/ReactToastify.css";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import styles from './FeaturePublish.module.css';
 
 interface FormState {
     entityId: string;
-    featureName: string;
+    Name: string;
     dataType: string;
     description: string;
 }
@@ -15,7 +13,7 @@ interface FormState {
 export const FeaturePublish: React.FC = () => {
     const [formState, setFormState] = useState<FormState>({
         entityId: "",
-        featureName: "",
+        Name: "",
         dataType: "",
         description: ""
     });
@@ -40,10 +38,10 @@ export const FeaturePublish: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { featureName, dataType, description } = formState;
+        const { Name, dataType, description } = formState;
 
         // Check if any field is empty
-        if (!featureName || !dataType || !description) {
+        if (!Name || !dataType || !description) {
             toast.error("All fields are required");
             return;
         }
@@ -51,7 +49,7 @@ export const FeaturePublish: React.FC = () => {
         setTableData((prevState) => [...prevState, formState]);
         setFormState({
             entityId: formState.entityId, // Keep the entityId unchanged
-            featureName: "",
+            Name: "",
             dataType: "",
             description: ""
         });
@@ -63,26 +61,26 @@ export const FeaturePublish: React.FC = () => {
 
     async function postData(url = '', data = {}) {
         const response = await fetch(url, {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         });
-        return response.json();
     }
 
     const handleFinalSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        for (const obj of tableData) {
-            try {
-                console.log(obj);
-                const response = await postData('https://featuremeshapis.azurewebsites.net/api/v1/feature', obj);
-                toast.success('Features Added Successfully');
+        try {
+            for (const obj of tableData) {
+                await postData(`https://featuremeshapis.azurewebsites.net/api/v1/feature/${formState.entityId}`, obj);
             }
-            catch (error) {
-                toast.error('Server Error');
-            }
+            toast.success('Features Added Successfully');
+            setTableData([]);
+        }
+        catch (error) {
+            toast.error('Server Error');
         }
     }
 
@@ -120,9 +118,9 @@ export const FeaturePublish: React.FC = () => {
                             <span>Feature Name:</span>
                             <input
                                 type="text"
-                                name="featureName"
+                                name="Name"
                                 placeholder="Enter the Feature Name"
-                                value={formState.featureName}
+                                value={formState.Name}
                                 onChange={handleChange}
                                 required
                             />
@@ -169,7 +167,7 @@ export const FeaturePublish: React.FC = () => {
                         <tbody className={styles.table_body_css}>
                             {tableData.map((rowData, index) => (
                                 <tr key={index}>
-                                    <td>{rowData.featureName}</td>
+                                    <td>{rowData.Name}</td>
                                     <td>{rowData.dataType}</td>
                                     <td>{rowData.description}</td>
                                     <td>
