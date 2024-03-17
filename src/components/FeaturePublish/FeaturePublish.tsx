@@ -89,7 +89,7 @@ export const FeaturePublish: React.FC = () => {
             {!entityIdSet && (
                 <div className={styles.form_container}>
                     <div className={styles.form_heading}>
-                        <h1>Set Entity Id</h1>
+                        <h1>Select Entity Id</h1>
                     </div>
                     <form className={styles.form} onSubmit={handleSetEntityId}>
                         <label>

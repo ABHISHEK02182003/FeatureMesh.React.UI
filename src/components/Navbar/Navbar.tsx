@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
       </div>
       <div className="navbar-right">
         <Link to="/" className="nav-button">Home</Link>
-        <div
+        {/* <div
           className="dropdown"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -45,7 +45,8 @@ const Navbar: React.FC = () => {
               )}
             </React.Fragment>
           )}
-        </div>
+        </div> */}
+        { isAuthenticated && <Link to="/publish" className="nav-button">Publish</Link> }
         { isAuthenticated && <Link to="/search" className="nav-button">Search</Link> }
         { isAuthenticated && <WelcomeName /> }
         { isAuthenticated ? <Logout /> : <Login /> }
