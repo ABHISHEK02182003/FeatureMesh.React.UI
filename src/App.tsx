@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css"; // Ensure you have this import f
 import { FeaturePage } from "./components/FeaturePage/FeaturePage";
 import ValuePublish from "./components/ValuePublish/ValuePublish";
 import { FeaturePublish } from "./components/FeaturePublish/FeaturePublish";
+import Publish from "./components/Publish/Publish";
 
 interface Props {
   className?: string;
@@ -34,6 +35,7 @@ export const App: FC<Props> = memo(function App({ msalInstance }) {
             <Route path="/" element={<LandingPage />} />
             <Route path="/publish/entity" element={<EntityPublishPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/publish" element={<Publish />} />
             <Route path="/publish/values" element={<ValuePublish />} />
             <Route path="/publish/feature" element={<FeaturePublish />} />
             <Route path="/entity-page/:id" element={<EntityPage />} />
