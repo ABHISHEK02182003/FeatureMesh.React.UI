@@ -3,6 +3,7 @@ import './FeaturePage.css';
 import { useParams } from 'react-router-dom';
 
 interface FeatureDetails {
+    name: string;
     entityName: string;
     datatype: string;
     author: string;
@@ -19,6 +20,7 @@ export const FeaturePage: React.FC<FeaturePageProps> = ({ featureDetails }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [details, setDetails] = useState<FeatureDetails>({
+        name: "",
         entityName: "",
         datatype: "",
         author: "John Doe",
@@ -35,7 +37,8 @@ export const FeaturePage: React.FC<FeaturePageProps> = ({ featureDetails }) => {
                 }
                 const data = await response.json();
                 setDetails({
-                    entityName: data.name,
+                    name: data.name,
+                    entityName: data.entityId,
                     datatype: data.dataType,
                     author: "John Doe",
                     totalEntries: 150,
@@ -64,7 +67,7 @@ export const FeaturePage: React.FC<FeaturePageProps> = ({ featureDetails }) => {
         <div className="page-container">
             <div className="feature-container">
                 <div className="feature-header">
-                    <h2>{details.entityName}</h2>
+                    <h2>{details.name}</h2>
                 </div>
                 <div className="feature-body">
                     <div className="feature-column feature-info">

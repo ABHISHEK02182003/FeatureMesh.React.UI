@@ -33,7 +33,7 @@ const SearchResults: React.FC<Props> = ({ entityData, featureData }) => {
     entityName: entity.name,
     entityKeyAttribute: entity.uniqueIdentifier,
     entityOwner: 'John Doe',
-    entityFeatureCount: entity.FeatureIds ? entity.FeatureIds.length : 0,
+    entityFeatureCount: entity.feautureIds ? entity.feautureIds.length : 0,
     entityID: entity.id
   }));
 
