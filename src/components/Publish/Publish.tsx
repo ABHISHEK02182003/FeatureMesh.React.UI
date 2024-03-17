@@ -24,9 +24,9 @@ const SidebarComponent = () => {
     <div className={styles.publish_container}>
       <div className={styles.sidebar}>
         <ul>
-          <li onClick={() => setSelectedOption('Entity')} className={selectedOption === 'Entity' ? 'active' : ''}>Entity</li>
-          <li onClick={() => setSelectedOption('Feature')} className={selectedOption === 'Feature' ? 'active' : ''}>Feature</li>
-          <li onClick={() => setSelectedOption('Values')} className={selectedOption === 'Values' ? 'active' : ''}>Values</li>
+          <li onClick={() => setSelectedOption('Entity')} className={selectedOption === 'Entity' ? styles.active : ''}>Entity</li>
+          <li onClick={() => setSelectedOption('Feature')} className={selectedOption === 'Feature' ? styles.active : ''}>Feature</li>
+          <li onClick={() => setSelectedOption('Values')} className={selectedOption === 'Values' ? styles.active : ''}>Values</li>
         </ul>
       </div>
       <div className={styles.content}>

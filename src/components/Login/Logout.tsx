@@ -9,6 +9,6 @@ export const Logout = () => {
     };
 
     return (
-        <button className='auth-button' onClick={handleSignOut}>Logout</button>
+        <button className='auth-button' onClick={handleSignOut}>LOGOUT</button>
     )
 };
