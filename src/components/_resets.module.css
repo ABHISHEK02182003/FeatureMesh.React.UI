@@ -12,7 +12,7 @@
 }
 
 .clapyResets,
-.clapyResets :not(span, a, ul, ol, li, p) {
+.clapyResets :not(span, a, ul, ol, li, p, table, thead, tbody) {
   display: flex;
 }
 
