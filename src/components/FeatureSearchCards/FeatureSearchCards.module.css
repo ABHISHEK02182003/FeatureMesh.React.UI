@@ -1,6 +1,7 @@
 /* FeatureSearchCard.module.css */
+
 .cardContainerLink {
-  text-decoration: None;
+  text-decoration: none;
   color: black;
 }
 
@@ -14,10 +15,9 @@
   justify-content: space-between;
   transition: transform 0.3s ease;
   font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-variation-settings:
-    "slnt" 0;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
 }
 
 .featureSearchCard:hover {
@@ -34,13 +34,14 @@
 
 .featureSearchCard .ownerDetails {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Changed from row to column */
   padding: 0 0.5rem; /* Same padding as in EntitySearchCard */
   width: 40%; /* Same width as keyAttribute */
 }
 
 .featureSearchCard .ownerDetails p {
   padding: 0.2rem; /* Same padding as in EntitySearchCard */
+  display: block; /* Ensure each paragraph appears on a separate line */
 }
 
 .featureSearchCard h3 {

@@ -85,7 +85,7 @@ export const FeaturePublish: React.FC = () => {
     }
 
     return (
-        <div className={styles.parent_container}>
+        <div className={styles.parent_container} style={{ margin: "6rem 1rem 1rem 2rem" }}>
             {!entityIdSet && (
                 <div className={styles.form_container}>
                     <div className={styles.form_heading}>
