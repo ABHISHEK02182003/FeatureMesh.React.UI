@@ -116,11 +116,6 @@ export const FeaturePage: React.FC<FeaturePageProps> = ({ featureDetails }) => {
             { !containsValues && (<div className='error-message'>This feature contains no values</div>)}
             { containsValues && (
 <div className="feature-footer">
-<select className="feature-dropdown">
-<option value="csv">CSV</option>
-<option value="excel">Excel</option>
-</select>
-<button className="feature-download-btn">Download</button>
 </div>
             )}
 </div>
