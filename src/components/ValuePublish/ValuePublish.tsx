@@ -15,25 +15,25 @@ const ValuePublish: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [ownerName, setOwnerName] = useState<string>("");
   const [entityName, setEntityName] = useState<string>("");
- 
+
   const handleOptionChange = (option: string) => {
     setSelectedOption(option);
   };
- 
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
- 
+
   const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerName(e.target.value);
   };
- 
+
   const handleEntityNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEntityName(e.target.value);
   };
- 
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedOption === "upload" && selectedFile) {
@@ -47,7 +47,7 @@ const ValuePublish: React.FC = () => {
           method: "POST",
           body: formData
         });
- 
+
         if (response.ok) {
           console.log('File uploaded successfully');
           toast.success("File uploaded successfully!");
@@ -62,6 +62,11 @@ const ValuePublish: React.FC = () => {
       // Handle manual entry functionality
       toast.success("Enter feature details");
     }
+  };
+
+  const handleTemplateDownload = () => {
+    // Assuming the template link is provided here
+    window.location.href = "https://featuremeshstorage.blob.core.windows.net/template-storage/Template.xlsx";
   };
  
   return (
@@ -131,12 +136,12 @@ const ValuePublish: React.FC = () => {
         </form>
         {selectedOption === "upload" && (
           <div className="template-download-container">
-            <button>Download Template</button>
+            <button onClick={handleTemplateDownload}>Download Template</button>
           </div>
         )}
       </div>
     </div>
   );
 };
- 
+
 export default ValuePublish;

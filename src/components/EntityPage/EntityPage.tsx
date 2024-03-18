@@ -139,10 +139,6 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 							<td>{details.id}</td>
 							</tr>
 							<tr>
-							<td>Author:</td>
-							<td>{details.author}</td>
-							</tr>
-							<tr>
 							<td>Created At:</td>
 							<td>{details.createdAt}</td>
 							</tr>
