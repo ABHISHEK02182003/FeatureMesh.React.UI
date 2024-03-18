@@ -32,6 +32,7 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 		context: "N/A",
 		feautureIds: null
 	});
+	// eslint-disable-next-line
 	const [disableDownload, setDisableDownload] = useState(true);
 
 	useEffect(() => {
@@ -131,12 +132,26 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 						<h1>{details.name}</h1>
 					</div>
 					<div className="entity-details-list">
-						<ul>
-							<li>Id: {details.id}</li>
-							<li>Created At: {details.createdAt}</li>
-							<li>Last Updated At: {details.lastUpdatedAt}</li>
-							<li>Context: {details.context}</li>
-						</ul>
+					<table>
+						<tbody>
+							<tr>
+							<td>Id:</td>
+							<td>{details.id}</td>
+							</tr>
+							<tr>
+							<td>Created At:</td>
+							<td>{details.createdAt}</td>
+							</tr>
+							<tr>
+							<td>Last Updated At:</td>
+							<td>{details.lastUpdatedAt}</td>
+							</tr>
+							<tr>
+							<td>Context:</td>
+							<td>{details.context}</td>
+							</tr>
+						</tbody>
+						</table>
 					</div>
 				</div>
 				<div className="right-container">
@@ -155,17 +170,6 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
 						<div>No features</div>
 					)}
 					</div>
-					{/* <div className="download-option">
-						<div className="input">
-							<select className="file-format-select">
-								<option value="csv">CSV</option>
-								<option value="excel">Excel</option>
-							</select>
-							<button className="download-button" disabled={disableDownload}>
-								Download
-							</button>
-						</div>
-					</div> */}
 				</div>
 			</div>
 		</div>

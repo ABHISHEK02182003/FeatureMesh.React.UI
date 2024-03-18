@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SearchPage: React.FC<Props> = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('Student');
   const [featureResults, setFeatureResults] = useState<any[]>([]);
   const [entityResults, setEntityResults] = useState<any[]>([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
@@ -30,6 +30,8 @@ export const SearchPage: React.FC<Props> = () => {
       console.error('Error fetching search results:', error);
     }
   };
+// eslint-disable-next-line
+  useEffect(() => {handleSearch(searchQuery);}, []);
 
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
@@ -38,7 +40,6 @@ export const SearchPage: React.FC<Props> = () => {
         <div className={classes.divider}></div>
         {searchPerformed && <SearchResults featureData={featureResults} entityData={entityResults} />}
       </div>
-      {/* You can access searchQuery state here and use it as needed */}
     </div>
   );
 };
