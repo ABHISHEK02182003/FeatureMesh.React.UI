@@ -23,11 +23,6 @@ const ValuePublish: React.FC = () => {
   const handleOptionChange = (option: "manual entry" | "upload") => {
     setSelectedOption(option);
   };
-
-  const handleTemplateDownload = () => {
-    // Assuming the template link is provided here
-    window.location.href = "https://featuremeshstorage.blob.core.windows.net/template-storage/Template.xlsx";
-  };
  
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -47,41 +42,22 @@ const ValuePublish: React.FC = () => {
     setNumRows(numRows + 1);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (selectedOption === "upload" && selectedFile) {
-      const formData = new FormData();
-      formData.append("files", selectedFile);
-      formData.append("ScientistName", ownerName); // Add owner name to form data
-      formData.append("EntityName", entityName); // Add entity name to form data
-     
-      try {
-        const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/files/uploadfilestostorage", {
-          method: "POST",
-          body: formData
-        });
-
-        if (response.ok) {
-          console.log('File uploaded successfully');
-          toast.success("File uploaded successfully!");
-        } else {
-          toast.error("Error uploading file");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        toast.error("Error uploading file");
-      }
-    } else {
-      // Handle manual entry functionality
-      toast.success("Enter feature details");
-    }
+    const jsonData = {
+      scientistName: ownerName,
+      entityName: entityName,
+      features: featureNames.map((featureName, index) => ({
+        featureName: featureName,
+        data: formData.map((row, rowIndex) => ({
+          featureIdentifier: `employee${rowIndex + 1}`,
+          featureValue: row[featureName] || '' 
+        }))
+      }))
+    };
   };
  
-  function publishClicked(){
-    const token = localStorage.getItem('token');
-    console.log("ABC");
-		window.open("https://calm-dune-021c01500.5.azurestaticapps.net/"+token,"_self");
-	} 
+ 
  
   const handleFetchFeatures = async () => {
     try {
@@ -91,7 +67,7 @@ const ValuePublish: React.FC = () => {
       }
  
       const featureData = await featureResponse.json();
-      console.log(featureData);
+      featureData.unshift("Feature Identifier");
       setFeatureNames(featureData); // Assuming featureData is an array of feature names directly
     } catch (error) {
       console.error('Error fetching features list:', error);
@@ -111,7 +87,7 @@ const ValuePublish: React.FC = () => {
         <div className="form-heading">
           <h1>Enter the Feature Value Details {selectedOption && <>using {selectedOption}</>}</h1>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <div className="toggle-button-container">
             <button
               className={`toggle-button ${selectedOption === "upload" ? "active" : ""}`}
@@ -160,12 +136,12 @@ const ValuePublish: React.FC = () => {
             </>
           )}
           <div className="button-container">
-            {selectedOption === "upload" && <button onClick={publishClicked} type="submit">Submit</button>}
+            {selectedOption === "upload" && <button type="submit">Submit</button>}
           </div>
         </form>
         {selectedOption === "upload" && (
           <div className="template-download-container">
-            <button onClick={handleTemplateDownload}>Download Template</button>
+            <button>Download Template</button>
           </div>
         )}
         {selectedOption === "manual entry" && (
@@ -216,12 +192,11 @@ const ValuePublish: React.FC = () => {
             </table>
             {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
           </div>
+          <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button>
           <div className="button-container">
             <button type="submit">Submit</button>
           </div>
         </form>
-       
-       
         )}
       </div>
     </div>

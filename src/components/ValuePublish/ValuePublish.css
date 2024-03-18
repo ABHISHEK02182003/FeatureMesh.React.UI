@@ -1,167 +1,169 @@
 .form-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.form-heading {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.option-container {
-  margin-bottom: 20px;
-}
-
-.option-container input[type="radio"] {
-  margin-right: 10px;
-}
-
-.file-input {
-  margin-top: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+ 
+  .form-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+ 
+  .option-container {
+    margin-bottom: 20px;
+  }
+ 
+  .option-container input[type="radio"] {
+    margin-right: 10px;
+  }
+ 
+  .file-input {
+    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+ 
+  .label {
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Black text color */
+  }
+ 
+  .button-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+ 
+  .button-container button {
+    background-color: #074b93; /* Blue color */
+    color: #fff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-}
-
-.label {
-  margin-right: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333; /* Black text color */
-}
-
-.button-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.button-container button {
-  background-color: #074b93; /* Blue color */
-  color: #fff; /* White text color */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  transition: background-color 0.3s;
-}
-
-.button-container button:hover {
-  background-color: #05376c;
-}
-
-.template-download-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.template-download-container button {
-  background-color: #28a745; /* Green color */
-  color: #fff; /* White text color */
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-  transition: background-color 0.3s;
-}
-
-.template-download-container button:hover {
-  background-color: #218838; /* Darker green color on hover */
-}
-.form-container label {
-  display: block;
-  margin-right: 1rem;
-}
-
-.form-container input[type="text"] {
-  width: 50%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-.form-container input[type="file"] {
-  margin-top: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    transition: background-color 0.3s;
+  }
+ 
+  .button-container button:hover {
+    background-color: #05376c;
+  }
+ 
+  .template-download-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+ 
+  .template-download-container button {
+    background-color: #28a745; /* Green color */
+    color: #fff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-}
+    transition: background-color 0.3s;
+  }
+ 
+  .template-download-container button:hover {
+    background-color: #218838; /* Darker green color on hover */
+  }
+  .form-container label {
+    display: block;
+    margin-right: 1rem;
+  }
+ 
+  .form-container input[type="text"] {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+ 
+  .form-container input[type="file"] {
+    margin-top: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
 
-.toggle-button-container {
-  display: flex;
-  padding-bottom: 1rem;
-}
-
-.toggle-button {
-  padding: 10px 20px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-button.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.toggle-button:last-child {
-  margin-right: 0;
-}
-
-.feature-grid {
-  margin-top: 2rem;
+  .toggle-button-container {
+    display: flex;
+    padding-bottom: 1rem;
+  }
+  
+  .toggle-button {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .toggle-button:last-child {
+    margin-right: 0;
+  }
+  
+  .feature-grid {
+    margin-top: 2rem;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .feature-grid table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    max-width: 600px; /* Adjust max-width as per your container */
+    border-collapse: collapse;
 }
 
 .feature-grid th, .feature-grid td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  width: 50%; /* Set width to 50% for equal sizing */
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    width: 50%; /* Set width to 50% for equal sizing */
 }
 
 .feature-grid th {
-  background-color: #5CAAFF;
+    background-color: #5CAAFF;
 }
 
 .feature-grid input[type="text"] {
-  width: calc(100% - 16px); /* Adjusting for padding */
-  padding: 8px;
-}  
-
-.fetch-features {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: 2px solid #007bff; /* Button border color */
-  color: #007bff; /* Button text color */
-  background-color: #ffffff; /* Button background color */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+    width: calc(100% - 16px); /* Adjusting for padding */
+    padding: 8px;
 }
 
-.fetch-features:hover {
-  background-color: #007bff; /* Button background color on hover */
-  color: #ffffff; /* Button text color on hover */
-  border-color: #007bff; /* Button border color on hover */
-}
+  .fetch-features {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #007bff; /* Button border color */
+    color: #007bff; /* Button text color */
+    background-color: #ffffff; /* Button background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+  }
+
+  .fetch-features:hover {
+    background-color: #007bff; /* Button background color on hover */
+    color: #ffffff; /* Button text color on hover */
+    border-color: #007bff; /* Button border color on hover */
+  }
