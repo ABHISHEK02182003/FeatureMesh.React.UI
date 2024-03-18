@@ -42,22 +42,22 @@ textarea {
 	color: #0056b3;
 }
 .form-container > form > button {
-	background: linear-gradient(to right, #add8e6, #000080);
-	border: none;
-	color: white;
-	padding: 0.625rem 1.25rem;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 1rem;
-	margin: 0.25rem 0.125rem;
-	cursor: pointer;
-	border-radius: 0.5rem;
-	margin-left: 2rem;
-	width: max-content;
-	position: relative;
-	left: 60rem;
-	bottom: -2rem;
+    background: linear-gradient(to right, #add8e6, #000080);
+    border: none;
+    color: white;
+    padding: 0.625rem 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25rem 0.125rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    margin-left: 2rem;
+    width: max-content;
+    position: relative;
+    bottom: -1.5rem;
+    align-self: end;
 }
 .form-container > form > label > span {
 	font-weight: 600;

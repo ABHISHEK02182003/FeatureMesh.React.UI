@@ -19,8 +19,8 @@ const ValuePublish: React.FC = () => {
   const [formData, setFormData] = useState<Array<{ [key: string]: string }>>([{}]);
   const [numRows, setNumRows] = useState(3); // Initialize with 3 rows
 
-
   const handleOptionChange = (option: "manual entry" | "upload") => {
+
     setSelectedOption(option);
   };
 
@@ -49,6 +49,30 @@ const ValuePublish: React.FC = () => {
       const featureResponse = await fetch(`https://featuremeshapis.azurewebsites.net/api/v1/Feature/ByName?scientistName=${ownerName}&entityName=${entityName}`);
       if (!featureResponse.ok) {
         throw new Error("Failed to fetch feature names");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (selectedOption === "upload" && selectedFile) {
+      const formData = new FormData();
+      formData.append("files", selectedFile);
+      formData.append("ScientistName", ownerName); // Add owner name to form data
+      formData.append("EntityName", entityName); // Add entity name to form data
+     
+      try {
+        const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/files/uploadfilestostorage", {
+          method: "POST",
+          body: formData
+        });
+
+        if (response.ok) {
+          console.log('File uploaded successfully');
+          toast.success("File uploaded successfully!");
+        } else {
+          toast.error("Error uploading file");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        toast.error("Error uploading file");
       }
   
       const featureData = await featureResponse.json();
@@ -66,6 +90,11 @@ const ValuePublish: React.FC = () => {
     setFormData(updatedFormData);
   };
 
+  const handleTemplateDownload = () => {
+    // Assuming the template link is provided here
+    window.location.href = "https://featuremeshstorage.blob.core.windows.net/template-storage/Template.xlsx";
+  };
+ 
   return (
     <div style={{ margin: "6rem 2rem 2rem 2rem" }}>
       <div className="form-container">
@@ -126,7 +155,7 @@ const ValuePublish: React.FC = () => {
         </form>
         {selectedOption === "upload" && (
           <div className="template-download-container">
-            <button>Download Template</button>
+            <button onClick={handleTemplateDownload}>Download Template</button>
           </div>
         )}
         {selectedOption === "manual entry" && (

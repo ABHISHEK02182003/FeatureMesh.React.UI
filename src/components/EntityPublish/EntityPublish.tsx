@@ -82,7 +82,7 @@ export const EntityPublishPage: React.FC = () => {
 	
 
 	return (
-		<div style={{ margin: "6rem 2rem 2rem 2rem" }}>
+		<div style={{ margin: "6rem 1rem 1rem 2rem" }}>
 			<div className="form-container">
 				<div className="form-heading">
 					<h1>Enter the Entity Details</h1>

@@ -5,10 +5,10 @@
     margin-right: 0.5rem;
     padding: 0.55em 1rem;
     border: none;
-    background-color: blueviolet;
+    background-color: #003977;
     color: white;
-    font-weight: 700;
-    font-size: 1.2em;
+    font-weight: 500;
+    font-size: 1em;
     cursor: pointer;
     transition: color 0.2s ease, font-weight 0.2s ease;
 }
