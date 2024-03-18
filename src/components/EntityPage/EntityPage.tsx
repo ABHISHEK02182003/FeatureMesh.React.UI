@@ -33,8 +33,8 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
         context: "N/A",
         feautureIds: null
     });
-    // eslint-disable-next-line
     const [disableDownload, setDisableDownload] = useState(true);
+    const [downloadType, setDownloadType] = useState<string>("CSV"); // Default download type is CSV
  
     useEffect(() => {
         const fetchEntityDetails = async () => {
@@ -65,6 +65,31 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
         fetchEntityDetails();
     }, [id]);
  
+    const handleDownload = async () => {
+        try {
+            let downloadApi = "";
+            if (downloadType === "CSV") {
+                downloadApi = `https://featuremeshapis.azurewebsites.net/api/v1/Values/Download-csv?entityId=${id}`;
+            } else if (downloadType === "Excel") {
+                downloadApi = `https://featuremeshapis.azurewebsites.net/api/v1/Values/Download-csventityId=${id}`;
+            }
+            const response = await fetch(downloadApi);
+            if (!response.ok) {
+                throw new Error('Failed to download file');
+            }
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `entity_${id}.${downloadType.toLowerCase()}`);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode?.removeChild(link);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
+    };
+ 
     const fetchFeatureName = async (featureId: string): Promise<string> => {
         try {
             const response = await fetch(`https://featuremeshapis.azurewebsites.net/api/v1/Feature/${featureId}`);
@@ -78,24 +103,6 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
             throw error;
         }
     };
- 
-    useEffect(() => {
-        if (details.feautureIds && details.feautureIds.length > 0) {
-            const fetchFeatureNames = async () => {
-                const promises = details.feautureIds!.map(featureId => fetchFeatureName(featureId));
-                try {
-                    const featureNames = await Promise.all(promises);
-                    console.log('Feature names:', featureNames);
-                    // Handle feature names here if needed
-                } catch (error) {
-                    console.error('Error fetching feature names:', error);
-                    // Handle error if needed
-                }
-            };
- 
-            fetchFeatureNames();
-        }
-    }, [details.feautureIds]);
  
     const [featureNames, setFeatureNames] = useState<string[]>([]);
  
@@ -162,25 +169,35 @@ export const EntityPage: React.FC<EntityPageProps> = ({ entityDetails }) => {
                         </tbody>
                         </table>
                     </div>
+                    <div className="download-container">
+                        <select value={downloadType} onChange={(e) => setDownloadType(e.target.value)}>
+                            <option value="CSV">CSV</option>
+                            <option value="Excel">Excel</option>
+                        </select>
+                        <button className="download-button" onClick={handleDownload}>Download</button>
+                    </div>
                 </div>
+
                 <div className="right-container">
                     <div>
                         <h1>Features</h1>
                     </div>
  
                     <div className="features-list">
-                    {featureNames.length > 0 ? (
-                        <ul>
-                            {featureNames.map((name, index) => (
-                                <li key={index} onClick={() => handleFeatureClick(details.feautureIds![index])}>{name}</li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <div>No features</div>
-                    )}
+                        {featureNames.length > 0 ? (
+                            <ul>
+                                {featureNames.map((name, index) => (
+                                    <li key={index} onClick={() => handleFeatureClick(details.feautureIds![index])}>{name}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <div>No features</div>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+export default EntityPage;

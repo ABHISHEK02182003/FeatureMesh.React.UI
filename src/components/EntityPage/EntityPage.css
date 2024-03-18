@@ -160,3 +160,9 @@ ul {
 	border-radius: 0.5rem;
 	margin-left: 2rem;
 }
+
+.download-container {
+	font-size: 1rem;
+	margin-top: 3rem;
+	margin-left: 1rem;
+}
