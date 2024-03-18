@@ -80,6 +80,10 @@ const ValuePublish: React.FC = () => {
     updatedFormData[index][featureName] = value;
     setFormData(updatedFormData);
   };
+
+  function publishClicked() {
+    window.open("https://calm-dune-021c01500.5.azurestaticapps.net/","_self");
+  }
  
   return (
     <div style={{ margin: "6rem 2rem 2rem 2rem" }}>
@@ -136,7 +140,7 @@ const ValuePublish: React.FC = () => {
             </>
           )}
           <div className="button-container">
-            {selectedOption === "upload" && <button type="submit">Submit</button>}
+            {selectedOption === "upload" && <button onClick={publishClicked} type="submit">Submit</button>}
           </div>
         </form>
         {selectedOption === "upload" && (
