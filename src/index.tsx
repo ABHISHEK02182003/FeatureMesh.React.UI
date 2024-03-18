@@ -32,10 +32,10 @@ const pca = new PublicClientApplication({
 // Adjusted to correctly handle the token extraction and saving
 async function handleAuthentication() {
  const token = retrieveToken();
- if (token) {
-   // Save the token to IndexedDB
-   await saveToken(token);
- }
+//  if (token) {
+//    // Save the token to IndexedDB
+//    await saveToken(token);
+//  }
 }
 
 function retrieveToken() {
@@ -47,6 +47,7 @@ function retrieveToken() {
         var jsonObject = JSON.parse(value);
         if('credentialType' in jsonObject && jsonObject['credentialType'] === 'IdToken') {
           console.log(jsonObject['secret']);
+          localStorage.setItem('token',jsonObject['secret']);
           return jsonObject['secret'];
         }
       }
