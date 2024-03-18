@@ -76,9 +76,7 @@ export const EntityPublishPage: React.FC = () => {
 		}
 	};
 
-	function publishClicked(){
-		window.open("https://calm-dune-021c01500.5.azurestaticapps.net/","_self");
-	}
+	
 	
 
 	return (
@@ -128,7 +126,7 @@ export const EntityPublishPage: React.FC = () => {
 							onChange={handleChange}
 						/>
 					</label>
-					<button onClick={publishClicked} type="submit">Publish</button>
+					<button type="submit">Publish</button>
 				</form>
 			</div>
 		</div>
