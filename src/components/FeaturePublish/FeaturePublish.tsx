@@ -1,7 +1,12 @@
 import { toast } from "react-toastify";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import styles from './FeaturePublish.module.css';
+
+interface Entity {
+    id: string;
+    name: string;
+}
 
 interface FormState {
     entityId: string;
@@ -19,6 +24,25 @@ export const FeaturePublish: React.FC = () => {
     });
     const [entityIdSet, setEntityIdSet] = useState(false);
     const [tableData, setTableData] = useState<FormState[]>([]);
+    const [entityNames, setEntityNames] = useState<Entity[]>([]);
+
+    useEffect(() => {
+        const fetchEntityNames = async () => {
+            try {
+                const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/entity");
+                if (!response.ok) {
+                    throw new Error('Failed to fetch entity names');
+                }
+                const data = await response.json();
+                setEntityNames(data);
+            } catch (error) {
+                console.error('Error fetching entity names:', error);
+                toast.error('Error fetching entity names');
+            }
+        };
+
+        fetchEntityNames();
+    }, []);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,6 +58,14 @@ export const FeaturePublish: React.FC = () => {
             return;
         }
         setEntityIdSet(true);
+    };
+
+    const handleEntityNameChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedEntityId = e.target.value;
+        const selectedEntity = entityNames.find(entity => entity.id === selectedEntityId);
+        if (selectedEntity) {
+            setFormState((prevState) => ({ ...prevState, entityId: selectedEntity.id }));
+        }
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -89,19 +121,22 @@ export const FeaturePublish: React.FC = () => {
             {!entityIdSet && (
                 <div className={styles.form_container}>
                     <div className={styles.form_heading}>
-                        <h1>Select Entity Id</h1>
+                        <h1>Select Entity Name</h1>
                     </div>
                     <form className={styles.form} onSubmit={handleSetEntityId}>
                         <label>
-                            <span>Entity Id:</span>
-                            <input
-                                type="text"
+                            <span>Entity Name:</span>
+                            <select
                                 name="entityId"
-                                placeholder="Enter the Entity Id"
                                 value={formState.entityId}
-                                onChange={handleChange}
+                                onChange={handleEntityNameChange}
                                 required
-                            />
+                            >
+                                <option value="">Select Entity Name</option>
+                                {entityNames.map(entity => (
+                                    <option key={entity.id} value={entity.id}>{entity.name}</option>
+                                ))}
+                            </select>
                         </label>
                         <button type="submit">Set</button>
                     </form>
@@ -188,3 +223,4 @@ export const FeaturePublish: React.FC = () => {
     );
 };
 
+export default FeaturePublish;
