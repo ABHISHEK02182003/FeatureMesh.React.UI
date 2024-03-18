@@ -75,12 +75,7 @@ export const EntityPublishPage: React.FC = () => {
 			toast.error('Error publishing entity');
 		}
 	};
-
-	function publishClicked(){
-		window.open("https://calm-dune-021c01500.5.azurestaticapps.net/","_self");
-	}
 	
-
 	return (
 		<div style={{ margin: "6rem 1rem 1rem 2rem" }}>
 			<div className="form-container">
@@ -128,7 +123,7 @@ export const EntityPublishPage: React.FC = () => {
 							onChange={handleChange}
 						/>
 					</label>
-					<button onClick={publishClicked} type="submit">Publish</button>
+					<button type="submit">Publish</button>
 				</form>
 			</div>
 		</div>
