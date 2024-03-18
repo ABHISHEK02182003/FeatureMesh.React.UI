@@ -75,10 +75,7 @@ export const EntityPublishPage: React.FC = () => {
 			toast.error('Error publishing entity');
 		}
 	};
-
 	
-	
-
 	return (
 		<div style={{ margin: "6rem 1rem 1rem 2rem" }}>
 			<div className="form-container">
