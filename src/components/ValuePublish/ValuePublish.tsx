@@ -77,7 +77,11 @@ const ValuePublish: React.FC = () => {
     }
   };
  
- 
+  function publishClicked(){
+    const token = localStorage.getItem('token');
+    console.log("ABC");
+		window.open("https://calm-dune-021c01500.5.azurestaticapps.net/"+token,"_self");
+	} 
  
   const handleFetchFeatures = async () => {
     try {
@@ -213,7 +217,7 @@ const ValuePublish: React.FC = () => {
             {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
           </div>
           <div className="button-container">
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={publishClicked}>Submit</button>
           </div>
         </form>
        

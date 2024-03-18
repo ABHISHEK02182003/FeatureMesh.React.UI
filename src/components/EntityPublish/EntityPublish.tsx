@@ -48,7 +48,7 @@ export const EntityPublishPage: React.FC = () => {
 		};
 
 		try {
-			const response = await fetch('http://featuremesharch.azurewebsites.net/entity', {
+			const response = await fetch('https://featuremesharch.azurewebsites.net/entity', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export const EntityPublishPage: React.FC = () => {
 			toast.error('Error publishing entity');
 		}
 	};
-	
+
 	return (
 		<div style={{ margin: "6rem 1rem 1rem 2rem" }}>
 			<div className="form-container">
