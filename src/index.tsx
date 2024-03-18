@@ -32,10 +32,10 @@ const pca = new PublicClientApplication({
 // Adjusted to correctly handle the token extraction and saving
 async function handleAuthentication() {
  const token = retrieveToken();
- if (token) {
-   // Save the token to IndexedDB
-   await saveToken(token);
- }
+//  if (token) {
+//    // Save the token to IndexedDB
+//    await saveToken(token);
+//  }
 }
 
 function retrieveToken() {
