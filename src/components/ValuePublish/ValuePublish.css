@@ -123,29 +123,29 @@
   
   .feature-grid {
     margin-top: 2rem;
-  }
-  
-  .feature-grid table {
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.feature-grid table {
     width: 100%;
     max-width: 600px; /* Adjust max-width as per your container */
     border-collapse: collapse;
-  }
-  
-  .feature-grid th, .feature-grid td {
+}
+
+.feature-grid th, .feature-grid td {
     border: 1px solid #ddd;
     padding: 0.5rem;
     width: 50%; /* Set width to 50% for equal sizing */
-  }
-  
-  .feature-grid th {
+}
+
+.feature-grid th {
     background-color: #5CAAFF;
-  }
-  
-  .feature-grid input[type="text"] {
+}
+
+.feature-grid input[type="text"] {
     width: calc(100% - 16px); /* Adjusting for padding */
     padding: 8px;
-  }
-  
+}
 
   .fetch-features {
     display: inline-block;
