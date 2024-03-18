@@ -96,3 +96,51 @@
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
   }
+
+  .toggle-button-container {
+    display: flex;
+    padding-bottom: 1rem;
+  }
+  
+  .toggle-button {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .toggle-button:last-child {
+    margin-right: 0;
+  }
+  
+  .feature-grid {
+    margin-top: 2rem;
+  }
+  
+  .feature-grid table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .feature-grid th, .feature-grid td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    width: 50%; /* Set width to 50% for equal sizing */
+  }
+  
+  .feature-grid th {
+    background-color: #7CB9E8;
+  }
+  
+  .feature-grid input[type="text"] {
+    width: calc(100% - 16px); /* Adjusting for padding */
+    padding: 8px;
+  }  

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./ValuePublish.css";
 import { useMsal } from "@azure/msal-react";
- 
+
 const ValuePublish: React.FC = () => {
   const { accounts } = useMsal();
   const account = accounts[0];
@@ -11,85 +11,78 @@ const ValuePublish: React.FC = () => {
   const username = account ? account.username : "Unknown";
   const fname = username.split(".")[0];
 
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<"manual entry" | "upload">("upload");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [ownerName, setOwnerName] = useState<string>("");
+  const [ownerName, setOwnerName] = useState<string>(fname);
   const [entityName, setEntityName] = useState<string>("");
- 
-  const handleOptionChange = (option: string) => {
+  const [featureNames, setFeatureNames] = useState<string[]>([]);
+  const [formData, setFormData] = useState<Array<{ [key: string]: string }>>([{}]);
+
+  const handleOptionChange = (option: "manual entry" | "upload") => {
     setSelectedOption(option);
   };
- 
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
- 
+
   const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerName(e.target.value);
   };
- 
+
   const handleEntityNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEntityName(e.target.value);
   };
- 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (selectedOption === "upload" && selectedFile) {
-      const formData = new FormData();
-      formData.append("files", selectedFile);
-      formData.append("ScientistName", ownerName); // Add owner name to form data
-      formData.append("EntityName", entityName); // Add entity name to form data
-     
-      try {
-        const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/files/uploadfilestostorage", {
-          method: "POST",
-          body: formData
-        });
- 
-        if (response.ok) {
-          console.log('File uploaded successfully');
-          toast.success("File uploaded successfully!");
-        } else {
-          toast.error("Error uploading file");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        toast.error("Error uploading file");
+
+
+  const handleFetchFeatures = async () => {
+    try {
+      const featureResponse = await fetch(`https://featuremeshapis.azurewebsites.net/api/v1/Feature/ByName?scientistName=${ownerName}&entityName=${entityName}`);
+      if (!featureResponse.ok) {
+        throw new Error("Failed to fetch feature names");
       }
-    } else {
-      // Handle manual entry functionality
-      toast.success("Enter feature details");
+  
+      const featureData = await featureResponse.json();
+      console.log(featureData);
+      setFeatureNames(featureData); // Assuming featureData is an array of feature names directly
+    } catch (error) {
+      console.error('Error fetching features list:', error);
+      toast.error("Failed to fetch feature names");
     }
+  };  
+
+  const handleAddRow = () => {
+    setFormData([...formData, {}]);
   };
- 
+
+  const handleInputChange = (index: number, featureName: string, value: string) => {
+    const updatedFormData = [...formData];
+    updatedFormData[index][featureName] = value;
+    setFormData(updatedFormData);
+  };
+
   return (
     <div style={{ margin: "6rem 2rem 2rem 2rem" }}>
       <div className="form-container">
         <div className="form-heading">
           <h1>Enter the Feature Value Details {selectedOption && <>using {selectedOption}</>}</h1>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="option-container">
-            <input
-              type="radio"
-              id="manualEntry"
-              name="option"
-              value="manual entry"
-              checked={selectedOption === "manual entry"}
-              onChange={() => handleOptionChange("manual entry")}
-            />
-            <label className="label" htmlFor="manualEntry">Manual Entry</label>
-            <input
-              type="radio"
-              id="upload"
-              name="option"
-              value="upload"
-              checked={selectedOption === "upload"}
-              onChange={() => handleOptionChange("upload")}
-            />
-            <label className="label" htmlFor="upload">Upload</label>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="toggle-button-container">
+            <button
+              className={`toggle-button ${selectedOption === "upload" ? "active" : ""}`}
+              onClick={() => handleOptionChange("upload")}
+            >
+              Upload
+            </button>
+            <button
+              className={`toggle-button ${selectedOption === "manual entry" ? "active" : ""}`}
+              onClick={() => handleOptionChange("manual entry")}
+            >
+              Manual Entry
+            </button>
           </div>
           {selectedOption === "upload" && (
             <>
@@ -99,9 +92,8 @@ const ValuePublish: React.FC = () => {
                   type="text"
                   id="ownerName"
                   placeholder="Owner Name"
-                  value={fname}
+                  value={ownerName}
                   onChange={handleOwnerNameChange}
-                  disabled
                 />
               </div>
               <div>
@@ -134,9 +126,58 @@ const ValuePublish: React.FC = () => {
             <button>Download Template</button>
           </div>
         )}
+        {selectedOption === "manual entry" && (
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div>
+              <label htmlFor="ownerName">Enter Owner Name:</label>
+                <input
+                  type="text"
+                  id="ownerName"
+                  placeholder="Owner Name"
+                  value={ownerName}
+                  onChange={handleOwnerNameChange} 
+              />
+            </div>
+            <div>
+              <label htmlFor="entityName">Enter Entity Name:</label>
+                <input
+                  type="text"
+                  id="entityName"
+                  placeholder="Entity Name"
+                  value={entityName}
+                  onChange={handleEntityNameChange}
+                />
+            </div>
+            <button type="button" onClick={handleFetchFeatures}>Fetch Features</button>
+            <div className="feature-grid">
+  <table>
+    <thead>
+      <tr>
+        {featureNames.map((featureName, index) => (
+          <th key={index}>{featureName}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {featureNames.map((featureName, index) => (
+          <td key={index}>
+            <input type="text" />
+          </td>
+        ))}
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+            <div className="button-container">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );
 };
- 
+
 export default ValuePublish;
