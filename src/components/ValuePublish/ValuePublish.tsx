@@ -3,14 +3,14 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./ValuePublish.css";
 import { useMsal } from "@azure/msal-react";
-
+ 
 const ValuePublish: React.FC = () => {
   const { accounts } = useMsal();
   const account = accounts[0];
-
+ 
   const username = account ? account.username : "Unknown";
   const fname = username.split(".")[0];
-
+ 
   const [selectedOption, setSelectedOption] = useState<"manual entry" | "upload">("upload");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [ownerName, setOwnerName] = useState<string>(fname);
@@ -18,63 +18,39 @@ const ValuePublish: React.FC = () => {
   const [featureNames, setFeatureNames] = useState<string[]>([]);
   const [formData, setFormData] = useState<Array<{ [key: string]: string }>>([{}]);
   const [numRows, setNumRows] = useState(3); // Initialize with 3 rows
-
+ 
+ 
   const handleOptionChange = (option: "manual entry" | "upload") => {
-
     setSelectedOption(option);
   };
-
+ 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
     }
   };
-
+ 
   const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerName(e.target.value);
   };
-
+ 
   const handleEntityNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEntityName(e.target.value);
   };
-
+ 
   const handleAddRow = () => {
     setNumRows(numRows + 1);
   };
-
-
-
+ 
+ 
+ 
   const handleFetchFeatures = async () => {
     try {
       const featureResponse = await fetch(`https://featuremeshapis.azurewebsites.net/api/v1/Feature/ByName?scientistName=${ownerName}&entityName=${entityName}`);
       if (!featureResponse.ok) {
         throw new Error("Failed to fetch feature names");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (selectedOption === "upload" && selectedFile) {
-      const formData = new FormData();
-      formData.append("files", selectedFile);
-      formData.append("ScientistName", ownerName); // Add owner name to form data
-      formData.append("EntityName", entityName); // Add entity name to form data
-     
-      try {
-        const response = await fetch("https://featuremeshapis.azurewebsites.net/api/v1/files/uploadfilestostorage", {
-          method: "POST",
-          body: formData
-        });
-
-        if (response.ok) {
-          console.log('File uploaded successfully');
-          toast.success("File uploaded successfully!");
-        } else {
-          toast.error("Error uploading file");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        toast.error("Error uploading file");
       }
-  
+ 
       const featureData = await featureResponse.json();
       console.log(featureData);
       setFeatureNames(featureData); // Assuming featureData is an array of feature names directly
@@ -83,16 +59,11 @@ const ValuePublish: React.FC = () => {
       toast.error("Failed to fetch feature names");
     }
   };  
-
+ 
   const handleInputChange = (index: number, featureName: string, value: string) => {
     const updatedFormData = [...formData];
     updatedFormData[index][featureName] = value;
     setFormData(updatedFormData);
-  };
-
-  const handleTemplateDownload = () => {
-    // Assuming the template link is provided here
-    window.location.href = "https://featuremeshstorage.blob.core.windows.net/template-storage/Template.xlsx";
   };
  
   return (
@@ -155,7 +126,7 @@ const ValuePublish: React.FC = () => {
         </form>
         {selectedOption === "upload" && (
           <div className="template-download-container">
-            <button onClick={handleTemplateDownload}>Download Template</button>
+            <button>Download Template</button>
           </div>
         )}
         {selectedOption === "manual entry" && (
@@ -167,7 +138,7 @@ const ValuePublish: React.FC = () => {
               id="ownerName"
               placeholder="Owner Name"
               value={ownerName}
-              onChange={handleOwnerNameChange} 
+              onChange={handleOwnerNameChange}
             />
           </div>
           <div>
@@ -204,18 +175,19 @@ const ValuePublish: React.FC = () => {
                 ))}
               </tbody>
             </table>
+            {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
           </div>
           <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button>
           <div className="button-container">
             <button type="submit">Submit</button>
           </div>
         </form>
-        
-        
+       
+       
         )}
       </div>
     </div>
   );
 };
-
+ 
 export default ValuePublish;
