@@ -140,9 +140,10 @@ const ValuePublish: React.FC = () => {
             </>
           )}
           <div className="button-container">
-            {selectedOption === "upload" && <button onClick={publishClicked} type="submit">Submit</button>}
+            {selectedOption === "upload" && <button type="submit">Upload</button>}
           </div>
         </form>
+        <div className="button-container"><button onClick={publishClicked}>Batch Processing Dashboard</button></div>
         {selectedOption === "upload" && (
           <div className="template-download-container">
             <button>Download Template</button>
