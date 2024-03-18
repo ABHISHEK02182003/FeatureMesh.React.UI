@@ -160,7 +160,7 @@ const ValuePublish: React.FC = () => {
             </>
           )}
           <div className="button-container">
-            {selectedOption === "upload" && <button type="submit">Submit</button>}
+            {selectedOption === "upload" && <button onClick={publishClicked} type="submit">Submit</button>}
           </div>
         </form>
         {selectedOption === "upload" && (
@@ -217,7 +217,7 @@ const ValuePublish: React.FC = () => {
             {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
           </div>
           <div className="button-container">
-            <button type="submit" onClick={publishClicked}>Submit</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
        
