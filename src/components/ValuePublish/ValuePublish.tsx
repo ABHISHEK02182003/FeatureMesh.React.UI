@@ -17,6 +17,8 @@ const ValuePublish: React.FC = () => {
   const [entityName, setEntityName] = useState<string>("");
   const [featureNames, setFeatureNames] = useState<string[]>([]);
   const [formData, setFormData] = useState<Array<{ [key: string]: string }>>([{}]);
+  const [numRows, setNumRows] = useState(3); // Initialize with 3 rows
+
 
   const handleOptionChange = (option: "manual entry" | "upload") => {
     setSelectedOption(option);
@@ -36,6 +38,11 @@ const ValuePublish: React.FC = () => {
     setEntityName(e.target.value);
   };
 
+  const handleAddRow = () => {
+    setNumRows(numRows + 1);
+  };
+
+
 
   const handleFetchFeatures = async () => {
     try {
@@ -52,10 +59,6 @@ const ValuePublish: React.FC = () => {
       toast.error("Failed to fetch feature names");
     }
   };  
-
-  const handleAddRow = () => {
-    setFormData([...formData, {}]);
-  };
 
   const handleInputChange = (index: number, featureName: string, value: string) => {
     const updatedFormData = [...formData];
@@ -128,52 +131,58 @@ const ValuePublish: React.FC = () => {
         )}
         {selectedOption === "manual entry" && (
           <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <label htmlFor="ownerName">Enter Owner Name:</label>
-                <input
-                  type="text"
-                  id="ownerName"
-                  placeholder="Owner Name"
-                  value={ownerName}
-                  onChange={handleOwnerNameChange} 
-              />
-            </div>
-            <div>
-              <label htmlFor="entityName">Enter Entity Name:</label>
-                <input
-                  type="text"
-                  id="entityName"
-                  placeholder="Entity Name"
-                  value={entityName}
-                  onChange={handleEntityNameChange}
-                />
-            </div>
-            <button type="button" onClick={handleFetchFeatures}>Fetch Features</button>
-            <div className="feature-grid">
-  <table>
-    <thead>
-      <tr>
-        {featureNames.map((featureName, index) => (
-          <th key={index}>{featureName}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        {featureNames.map((featureName, index) => (
-          <td key={index}>
-            <input type="text" />
-          </td>
-        ))}
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-            <div className="button-container">
-              <button type="submit">Submit</button>
-            </div>
-          </form>
+          <div>
+            <label htmlFor="ownerName">Enter Owner Name:</label>
+            <input
+              type="text"
+              id="ownerName"
+              placeholder="Owner Name"
+              value={ownerName}
+              onChange={handleOwnerNameChange} 
+            />
+          </div>
+          <div>
+            <label htmlFor="entityName">Enter Entity Name:</label>
+            <input
+              type="text"
+              id="entityName"
+              placeholder="Entity Name"
+              value={entityName}
+              onChange={handleEntityNameChange}
+            />
+          </div>
+          <div className="fetch-features-container"> {/* added container class */}
+            <button className="fetch-features" type="button" onClick={handleFetchFeatures}>Fetch Features</button>
+          </div>
+          <div className="feature-grid">
+            <table>
+              <thead>
+                <tr>
+                  {featureNames.map((featureName, index) => (
+                  <th key={index}>{featureName}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(numRows)].map((_, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {featureNames.map((featureName, index) => (
+                      <td key={index}>
+                        <input type="text" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
+          </div>
+          <div className="button-container">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        
+        
         )}
       </div>
     </div>
