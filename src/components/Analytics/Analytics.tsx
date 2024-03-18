@@ -81,11 +81,11 @@ const Analytics: React.FC = () => {
       <div className={classes.line3}></div>
       <div className={classes.line4}></div>
       <div className={classes._2M}>{formatted_rows_count}</div>
-      <div className={classes.ticketsDeliveredThisMonth}>Rows of Entries</div>
+      <div className={classes.ticketsDeliveredThisMonth}>Number of Features</div>
       <div className={classes._46K}>{formatted_scientists_count}</div>
       <div className={classes.activeCustomersRate}>Data Scientists on our platform</div>
       <div className={classes._99}>{formatted_entity_count}</div>
-      <div className={classes.customerSatisfactionRate}>Feature Sets</div>
+      <div className={classes.customerSatisfactionRate}>Rows of Entries</div>
     </div>
   );
 }
