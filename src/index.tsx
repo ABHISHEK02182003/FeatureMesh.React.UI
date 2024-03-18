@@ -47,6 +47,7 @@ function retrieveToken() {
         var jsonObject = JSON.parse(value);
         if('credentialType' in jsonObject && jsonObject['credentialType'] === 'IdToken') {
           console.log(jsonObject['secret']);
+          localStorage.setItem('token',jsonObject['secret']);
           return jsonObject['secret'];
         }
       }
