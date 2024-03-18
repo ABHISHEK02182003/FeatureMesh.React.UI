@@ -41,6 +41,21 @@ const ValuePublish: React.FC = () => {
   const handleAddRow = () => {
     setNumRows(numRows + 1);
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const jsonData = {
+      scientistName: ownerName,
+      entityName: entityName,
+      features: featureNames.map((featureName, index) => ({
+        featureName: featureName,
+        data: formData.map((row, rowIndex) => ({
+          featureIdentifier: `employee${rowIndex + 1}`,
+          featureValue: row[featureName] || '' 
+        }))
+      }))
+    };
+  };
  
  
  
@@ -52,7 +67,7 @@ const ValuePublish: React.FC = () => {
       }
  
       const featureData = await featureResponse.json();
-      console.log(featureData);
+      featureData.unshift("Feature Identifier");
       setFeatureNames(featureData); // Assuming featureData is an array of feature names directly
     } catch (error) {
       console.error('Error fetching features list:', error);
@@ -182,8 +197,6 @@ const ValuePublish: React.FC = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
-       
-       
         )}
       </div>
     </div>
