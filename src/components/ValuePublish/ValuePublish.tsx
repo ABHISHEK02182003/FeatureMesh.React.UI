@@ -190,7 +190,6 @@ const ValuePublish: React.FC = () => {
                 ))}
               </tbody>
             </table>
-            {/* <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button> */}
           </div>
           <button className="fetch-features" type="button" onClick={handleAddRow}>Add More Rows</button>
           <div className="button-container">
